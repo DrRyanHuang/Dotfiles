@@ -177,7 +177,7 @@ install_packages() {
     log_info "准备安装基础软件包..."
     
     # 基础包列表
-    PACKAGES="zsh git curl wget tmux fzf ripgrep zoxide"
+    PACKAGES="zsh git curl wget tmux"
     
     # 根据系统调整包名或添加特定包
     case "$OS_NAME" in
@@ -391,15 +391,7 @@ EOF
         cat <<EOF >> "$ZSHRC"
 
 # 3. Modern Tools Init
-# Zoxide (Smart cd)
-if command -v zoxide > /dev/null; then
-  eval "\$(zoxide init zsh)"
-fi
-
-# FZF
-if command -v fzf > /dev/null; then
-  source <(fzf --zsh) 2>/dev/null || true # Fallback for older fzf versions
-fi
+# TBC
 
 # 4. Aliases
 alias ll='ls -alF'
