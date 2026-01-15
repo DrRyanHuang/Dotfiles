@@ -210,27 +210,24 @@ install_packages() {
 }
 
 install_uv() {
-    # --- 变更点：先检查是否存在 ---
+    # 1. 检查是否存在
     if command -v uv >/dev/null 2>&1; then
-        log_info "检测到 uv 已经安装 ($(which uv))，跳过安装步骤。"
+        log_info "检测到 uv 已经安装 ($(which uv))，跳过。"
         return
     fi
-    # ---------------------------
-    
-    log_info "正在安装 uv (Python Package Manager)..."
-    
-    # UV 安装安全性：禁止直接管道执行，使用临时文件
-    UV_INSTALLER="/tmp/uv-installer.sh"
-    
-    # 网络超时控制：连接10s，最大60s
-    curl -L --connect-timeout 10 --max-time 60 https://astral.sh/uv/install.sh -o "$UV_INSTALLER" || fail_fast "下载 uv 安装脚本失败 (超时或网络错误)。"
-    
-    log_info "UV 安装脚本下载成功，开始安装..."
-    sh "$UV_INSTALLER" || fail_fast "uv 安装脚本执行失败。"
-    
-    # 清理临时文件
-    rm -f "$UV_INSTALLER"
-    log_success "uv 安装完成。"
+
+    log_info "正在安装 uv..."
+
+    # 2. 执行安装 (已加回 timeout)
+    # 不要在这一行后面直接加 || fail_fast，防止脚本改不掉 .bashrc 返回非0导致误报
+    curl -LsSf --connect-timeout 10 --max-time 60 https://astral.sh/uv/install.sh | sh
+
+    # 3. 结果验证 (结果导向：只要文件落地就算成功)
+    if [ -f "$HOME/.cargo/bin/uv" ] || [ -f "$HOME/.local/bin/uv" ]; then
+        log_success "uv 安装完成。"
+    else
+        fail_fast "uv 安装失败 (未找到可执行文件)。"
+    fi
 }
 
 install_uv_tools() {
