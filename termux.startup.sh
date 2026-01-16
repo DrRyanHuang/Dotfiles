@@ -67,8 +67,15 @@ echo -e "\033[32m[3/5] 安装基础开发工具...\033[0m"
 # termux-services: 守护进程管理（让sshd持久化）
 # python: 你的老本行
 # tree: 查看目录结构
-pkg install -y openssh vim git wget curl termux-api termux-services python tree
-
+# jq: 处理 json 文件
+pkg install -y openssh vim git wget curl termux-api termux-services python tree jq
+# ==============================================================================
+# 假如使用 vim 等工具出现了如下问题：
+#     CANNOT LINK EXECUTABLE "vim": library "libsodium.so" not found
+#     CANNOT LINK EXECUTABLE "vim": library "libacl.so" not found
+# 可以尝试安装如下库来解决：
+#     pkg install libsodium libacl
+# ==============================================================================
 
 
 
