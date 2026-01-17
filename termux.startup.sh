@@ -68,7 +68,9 @@ echo -e "\033[32m[3/5] 安装基础开发工具...\033[0m"
 # python: 你的老本行
 # tree: 查看目录结构
 # jq: 处理 json 文件
-pkg install -y openssh vim git wget curl termux-api termux-services python tree jq
+# tmux: 
+# uv: 
+pkg install -y openssh vim git wget curl termux-api termux-services python tree jq tmux uv
 # ==============================================================================
 # 假如使用 vim 等工具出现了如下问题：
 #     CANNOT LINK EXECUTABLE "vim": library "libsodium.so" not found

@@ -136,7 +136,7 @@ BAT_INFO=$(get_battery)
 # =================================================================
 printf "%b----------------------------------------%b\n" "$C_KEY" "$C_RESET"
 # 打印标题
-printf "\n%b   Termux Environment - $(date '+%Y-%m-%d %H:%M')%b\n\n" "$C_TIT" "$C_RESET"
+printf "%b   Termux Environment - $(date '+%Y-%m-%d %H:%M')%b\n\n" "$C_TIT" "$C_RESET"
 
 # 打印行
 print_row "$I_OS"  "System"   "$KERNEL ($ARCH)"
