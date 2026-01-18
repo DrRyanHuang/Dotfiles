@@ -134,6 +134,14 @@ BAT_INFO=$(get_battery)
 # =================================================================
 # 🖥️ 输出显示
 # =================================================================
+# -----------------------------------------------------------------
+# 安装 figlet (生成字) 和 toilet (更高级的生成字)
+# lolcat（上彩色渐变）
+# pkg install figlet toilet
+# python -m pip install lolcat -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+# -----------------------------------------------------------------
+clear
+toilet -f standard "WELCOME" | lolcat -F 0.1
 printf "%b----------------------------------------%b\n" "$C_KEY" "$C_RESET"
 # 打印标题
 printf "%b   Termux Environment - $(date '+%Y-%m-%d %H:%M')%b\n\n" "$C_TIT" "$C_RESET"
