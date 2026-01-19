@@ -285,7 +285,7 @@ install_uv_tools() {
     # --- 2. 定义工具列表 ---
     # 在这里添加你需要的任何工具。
     # 推荐加入 ruff (极速 linter) 和 httpie (人性化 curl)
-    local TOOLS=("pytest" "ninja" "ruff" "httpie" "ipython" "prek" "gpustat")
+    local TOOLS=("ninja" "ruff" "httpie" "ipython" "prek" "gpustat")
     
     # --- 3. 智能安装/更新循环 ---
     for tool in "${TOOLS[@]}"; do
