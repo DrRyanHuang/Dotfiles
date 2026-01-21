@@ -86,6 +86,11 @@ setup_proxy() {
         export HTTPS_PROXY="$PROXY_URL"
         export all_proxy="$PROXY_URL"
         
+        # 设置代理排除列表
+        NO_PROXY_LIST="localhost,127.0.0.1,0.0.0.0,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.local,.svc,.cluster.local,.tsinghua.edu.cn,.ustc.edu.cn,.sjtu.edu.cn,.aliyun.com,.aliyuncs.com,.bcebos.com,.baidu.com,.qq.com,.tencent.com,.myqcloud.com,.huaweicloud.com,.doubanio.com,.npmmirror.com,.taobao.org,.163.com,.sohu.com"
+        export no_proxy="$NO_PROXY_LIST"
+        export NO_PROXY="$NO_PROXY_LIST"
+        
         # 即使是继承的代理，也可能没有写入 .zshrc，所以依然询问持久化
         read -p "是否将代理写入 ~/.zshrc 以永久生效? (y/n, 默认 n): " write_proxy
         if [[ "$write_proxy" == "y" || "$write_proxy" == "Y" ]]; then
@@ -382,6 +387,11 @@ export https_proxy="$PROXY_URL"
 export all_proxy="$PROXY_URL"
 export HTTP_PROXY="$PROXY_URL"
 export HTTPS_PROXY="$PROXY_URL"
+
+# 代理排除列表
+NO_PROXY_LIST="$NO_PROXY_LIST"
+export no_proxy="$NO_PROXY_LIST"
+export NO_PROXY="$NO_PROXY_LIST"
 EOF
         fi
         
