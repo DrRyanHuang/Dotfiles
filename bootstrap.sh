@@ -404,6 +404,7 @@ EOF
 alias ll='ls -alF'
 alias t='tmux'
 alias zinstall='source ~/.zshrc'
+alias ip="curl ipinfo.io"
 
 ### --- End of Setup Script ---
 EOF
