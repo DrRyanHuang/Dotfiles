@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  dev_container_c:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # 在这里修改基础镜像版本，Dockerfile 会自动获取
+        - BASE_IMAGE=nvcr.io/nvidia/pytorch:26.02-py3
+        # 容器内部 SSH 服务实际监听的端口
+        - SSH_PORT_INTERNAL=22222
+        # 登录密码
+        - ROOT_PASSWORD=complex_password_here
+    container_name: container_c
+    restart: always
+    
+    # ==========================================
+    # 关键配置：启用 NVIDIA GPU
+    # ==========================================
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all # 映射所有 GPU
+              capabilities: [gpu]
+    
+    # ==========================================
+    # 端口映射：从 22222 开始的 6 个端口
+    # ==========================================
+    ports:
+      # 格式：宿主机(Windows)端口 : 容器内部端口
+      - "22222:22222" # SSH
+      - "22223:22223" # 预留 (例如给 Jupyter)
+      - "22224:22224" # 预留 (例如给 TensorBoard)
+      - "22225:22225" # 预留
+      - "22226:22226" # 预留
+      - "22227:22227" # 预留
+    
+    # ==========================================
+    # 数据卷挂载：持久化你的代码（强烈建议）
+    # ==========================================
+    volumes:
+      # 将 Windows 当前目录下的 data 文件夹挂载到容器的 /workspace
+      - ./data:/workspace
+    
+    working_dir: /workspace
